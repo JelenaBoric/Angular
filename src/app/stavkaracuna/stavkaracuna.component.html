@@ -1,0 +1,60 @@
+<mat-toolbar color='primary'><span class = "naslov">Stavke racuna</span></mat-toolbar>
+
+<table mat-table [dataSource] = "dataSource" matSort  class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="rednibroj">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Redni broj </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.redniBroj}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="kolicina">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Kolicina </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.kolicina}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="jedinicamere">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Jedinica mere </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.jedinicaMere}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cena">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Cena </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.cena}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="racun">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Racun </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.racunBean.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="proizvod">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Proizvod </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.proizvodBean.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="akcije">
+          <mat-header-cell *matHeaderCellDef>
+            <button mat-icon-button color="primary" (click)="openDialog(1)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </mat-header-cell>
+    
+          <mat-cell *matCellDef="let row; let i=index;">
+            <button mat-icon-button color="primary" (click)="openDialog(2, row.id, row.redniBroj, row.kolicina, row.jedinicaMere, row.cena, row.racunBean, row.proizvodBean)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="openDialog(3, row.id, row.redniBroj, row.kolicina, row.jedinicaMere, row.cena, row.racunBean, row.proizvodBean)">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
